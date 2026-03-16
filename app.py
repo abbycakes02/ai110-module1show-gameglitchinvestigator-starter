@@ -31,7 +31,7 @@ if "secret" not in st.session_state:
     st.session_state.secret = random.randint(low, high)
 
 if "attempts" not in st.session_state:
-    st.session_state.attempts = 1
+    st.session_state.attempts = 0
 
 if "score" not in st.session_state:
     st.session_state.score = 0
@@ -45,7 +45,8 @@ if "history" not in st.session_state:
 st.subheader("Make a guess")
 
 st.info(
-    f"Guess a number between 1 and 100. "
+    # FIXED: info banner hardecoded changes now.
+    f"Guess a number between {low} and {high}. "
     f"Attempts left: {attempt_limit - st.session_state.attempts}"
 )
 
@@ -69,24 +70,20 @@ with col2:
 with col3:
     show_hint = st.checkbox("Show hint", value=True)
 
+# FIX ME: new game shows tht the status is never reset
 if new_game:
     st.session_state.attempts = 0
-    st.session_state.secret = random.randint(1, 100)
+    st.session_state.secret = random.randint(low, high)
+    st.session_state.status = "playing"
+    st.session_state.history = []
+    st.session_state.score = 0
     st.success("New game started.")
     st.rerun()
-
-if st.session_state.status != "playing":
-    if st.session_state.status == "won":
-        st.success("You already won. Start a new game to play again.")
-    else:
-        st.error("Game over. Start a new game to try again.")
-    st.stop()
 
 if submit:
     st.session_state.attempts += 1
 
-    ok, guess_int, err = parse_guess(raw_guess)
-
+    ok, guess_int, err = parse_guess(raw_guess, low, high)
     if not ok:
         st.session_state.history.append(raw_guess)
         st.error(err)
@@ -94,9 +91,9 @@ if submit:
         st.session_state.history.append(guess_int)
 
         outcome = check_guess(guess_int, st.session_state.secret)
-        hint_map = {"Too High": "📉 Go LOWER!", "Too Low": "📈 Go HIGHER!", "Win": "🎉 Correct!"}
-        if show_hint:
-            st.warning(hint_map.get(outcome, ""))
+        hint_map = {"Too High": "📉 Go LOWER!", "Too Low": "📈 Go HIGHER!"}
+        if show_hint and outcome in hint_map:
+            st.warning(hint_map[outcome])
 
         st.session_state.score = update_score(
             current_score=st.session_state.score,
@@ -111,6 +108,7 @@ if submit:
                 f"You won! The secret was {st.session_state.secret}. "
                 f"Final score: {st.session_state.score}"
             )
+            st.stop()
         else:
             if st.session_state.attempts >= attempt_limit:
                 st.session_state.status = "lost"
@@ -119,6 +117,13 @@ if submit:
                     f"The secret was {st.session_state.secret}. "
                     f"Score: {st.session_state.score}"
                 )
+
+if st.session_state.status != "playing":
+    if st.session_state.status == "won":
+        st.success("You already won. Start a new game to play again.")
+    else:
+        st.error("Game over. Start a new game to try again.")
+    st.stop()
 
 st.divider()
 st.caption("Built by an AI that claims this code is production-ready.")

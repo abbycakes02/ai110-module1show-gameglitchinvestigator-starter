@@ -1,4 +1,4 @@
-git pull origin main --allow-unrelated-histories
+
 from logic_utils import check_guess
 
 def test_winning_guess():

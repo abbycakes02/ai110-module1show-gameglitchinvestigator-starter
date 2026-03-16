@@ -24,7 +24,7 @@ I used claude.
 - Give one example of an AI suggestion that was correct (including what the AI suggested and how you verified the result).
 - The AI caught a bug I missed within app.py where the score penalized too high inconsistently.
 - Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
--None of the AI suggestions were misleading that I saw.
+-None of the AI suggestions were misleading that I saw, but once a terminal output was placed in .py file insteadf of being in the terminal.
 
 ---
 
@@ -34,14 +34,15 @@ I used claude.
 - I tested the pipeline out to ensure the bug was fixed.
 - Describe at least one test you ran (manual or using pytest)  
   and what it showed you about your code.
-  - 
+  - I ran a test to make sure the range of numbers was correct.
 - Did AI help you design or understand any tests? How?
-- AI helped me design and 
+- AI helped me design and understand the tests by letting my know what the tests were specifically testing and allowing me to implement more edge cases. 
 ---
 
 ## 4. What did you learn about Streamlit and state?
 
 - How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
+- Every time you clcik a button on streamlit, it re-runs the page from top to bottom and then session states come in and you can mainttain the score state there to survive reruns instead of resetting to zero. 
 
 ---
 
@@ -49,5 +50,8 @@ I used claude.
 
 - What is one habit or strategy from this project that you want to reuse in future labs or projects?
   - This could be a testing habit, a prompting strategy, or a way you used Git.
+  - I think I will use inline chat where i highlgiht the code i find flawed and focus on that aspect ifI don't like AI's responses.
 - What is one thing you would do differently next time you work with AI on a coding task?
+- I think have more individualized problems and debugging them individually instead of all at once.
 - In one or two sentences, describe how this project changed the way you think about AI generated code.
+- I think I realized you need to understand what's going on to debug ai can't do everything. 

@@ -26,12 +26,18 @@ It wrote the code, ran away, and now the game is unplayable.
 ## 📝 Document Your Experience
 
 - [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+- The game's purposes is to user users guess a number and there is different variabilities of difficulty for the project.
+- [x] Detail which bugs you found.
+- The hints were backwards (go higher when it should say go lower). The Hard difficulty range was 1-50, making it easier than Normal (1-100). The secret number alternated between int and str every other attempt, breaking comparisons. The attempts counter started at 1 instead of 0. Invalid inputs wasted an attempt before validation. The New Game button never reset status, history, or score. The info banner was hardcoded to "1 and 100" regardless of difficulty. No range validation prevented guesses outside the allowed range.
+
+- [x] Explain what fixes you applied.
+- Fixed hint messages so Too High says "Go LOWER" and Too Low says "Go HIGHER". Fixed Hard difficulty range to 1-200. Removed the type-switching bug so secret is always an int. Initialized attempts at 0. Moved attempt increment after validation so invalid inputs don't waste a turn. Fixed New Game to reset status, history, score, and use the correct difficulty range. Updated the info banner to show the dynamic range. Added range validation to parse_guess so out-of-bounds numbers are rejected.
 
 ## 📸 Demo
 
-- [ ] [Insert a screenshot of your fixed, winning game here]
+![Winning game screenshot](Screenshot 2026-03-15 at 11.30.34 PM.png)
+
+
 
 ## 🚀 Stretch Features
 
