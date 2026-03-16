@@ -6,7 +6,7 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 
 - What did the game look like the first time you ran it?
 - List at least two concrete bugs you noticed at the start  
-  (for example: "the secret number kept changing" or "the hints were backwards").
+  (for example: "the hints were backwards").
 
 
 I noticed I tried playing the game, but when I guessed a number and tried playing the game, it kept saying lower even when I said 1 which is the lowest number it could be because the guess was from the range 1 to 100. When I tried debugging the issue, I think I found out that it says go lower, but I think it means go higher. 
@@ -41,9 +41,7 @@ I used claude.
 
 ## 4. What did you learn about Streamlit and state?
 
-- In your own words, explain why the secret number kept changing in the original app.
 - How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
-- What change did you make that finally gave the game a stable secret number?
 
 ---
 
